@@ -1,0 +1,27 @@
+Crontab, stands for cron table, which is a list of commands scheduled to run at regular time intervals on the system.
+
+If we need to schedule any task on Linux, we should basically edit the crontab file. We can do that using the below command.
+
+crontab -e              # edit the crontab file
+crontab -l              # list current cron tasks
+crontab -u username -e  # edit other users's crontab file
+
+
+* * * * * <shell command>   # execute cron job every minute
+0 1 * * * <shell command>   # execute cron job every day at 1 a.m.
+* * 1 * * <shell command>   # execute every minute in January
+* * * * 6 <shell command>   # execute every minute on every saturday
+0 1/15 * jan,jun mon,fri <command> # execute at every 1 a.m. and 3
+                                     p.m. every monday and friday on
+                                     january and june
+
+
+
+
+Finally let’s create some crontab tasks. Create a cron task writes the system date information every day at 1 p.m. to the date.log file.
+crontab -e
+0 13 * * * date >> /home/ec2-user/date.log
+Create a cron task updates and upgrades our server every Sunday at 3 a.m.
+0 3 * * sun sudo yum update -y
+List the cron tasks.
+crontab -l
